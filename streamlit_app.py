@@ -39,6 +39,7 @@ st.markdown("""
 ph = st.empty()
 n = 50
 for secs in range(n, 0, -1):
+    secs -= 1
     mm, ss = secs // 60, secs % 60
     ph.metric("PGP assistant", f"{mm:02d}:{ss:02d}")
     time.sleep(1)
@@ -52,8 +53,6 @@ for secs in range(n, 0, -1):
         n = 50
         # Optional: Clear the query params to reset the state
         #st.query_params.clear()
-
-
 
 
 
