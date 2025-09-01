@@ -3,46 +3,57 @@ import time
 
 st.set_page_config()
 
-#with open("style.css") as css_style:
-#    st.markdown(f"<style>{css_style.read()}</style>", unsafe_allow_html=True)
 
 
+# Styled HTML form button
 st.markdown("""
     <style>
-        button {
+        .custom-button {
             width: 100vw;
             height: 50vh;
-            font-size: 48px;
-            background-color: #4CAF50;
+            font-size: 72px;
+            background-color: #6200EE;
             color: white;
             border: none;
             cursor: pointer;
         }
 
-        /* Make sure body doesn't add padding */
-        .main, body, html {
+        body, html {
             margin: 0;
             padding: 0;
         }
 
         @media (min-width: 768px) {
-            .full-width-half-height-button {
-                width: 50vw;  /* Optional: Adjust for tablets/desktops */
+            .custom-button {
+                width: 50vw;
             }
         }
     </style>
 
+    <form action="" method="get">
+        <input type="hidden" name="custom_button" value="1">
+        <button class="custom-button" type="submit">PASSA</button>
+    </form>
 """, unsafe_allow_html=True)
 
-
-button_1 = st.button("PASSA")
-
 ph = st.empty()
-N = 50
-for secs in range(N, 0, -1):
+n = 50
+for secs in range(n, 0, -1):
     mm, ss = secs // 60, secs % 60
     ph.metric("PGP assistant", f"{mm:02d}:{ss:02d}")
     time.sleep(1)
 
-    if button_1:
-        n = 5 * 60
+    # Get current query params
+    params = st.query_params
+    # Check if button was clicked
+    clicked = params.get("custom_button") == "1"
+    # Trigger Python logic
+    if clicked:
+        n = 50
+        # Optional: Clear the query params to reset the state
+        #st.query_params.clear()
+
+
+
+
+
